@@ -1,0 +1,13 @@
+# ouwds
+
+> ouwds is a quiet, fast chess app by Misyi (born 2026-11-18). Two players take turns on one phone with adjustable clocks, undo and redo, game history and a profile. AI opponents (gop and gep) are planned. All data stays on the user's device. Available in Indonesian and English as a website and an Android app.
+
+## Pages
+- [Home](https://ouwds.my.id/): start a game and open profile and settings
+- [About](https://ouwds.my.id/about): what ouwds is, what exists now and what is planned
+- [Privacy policy](https://ouwds.my.id/privacy): what is stored locally, camera and gallery use, how to delete data
+- [Terms of use](https://ouwds.my.id/terms): usage rules and ownership
+
+## Notes
+- Product of Misyi. No ads, trackers or analytics.
+- Game and profile screens (/welcome, /play, /board, /profile, /settings) are interactive app views, not documents.

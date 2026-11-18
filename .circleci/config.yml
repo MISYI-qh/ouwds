@@ -1,0 +1,34 @@
+version: 2.1
+jobs:
+  check-web:
+    docker:
+      - image: cimg/node:22.5
+    steps:
+      - checkout
+      - run: node scripts/check-web.js
+  build-android:
+    docker:
+      - image: cimg/android:2024.01
+    resource_class: large
+    steps:
+      - checkout
+      - run:
+          name: Salin web ke assets
+          command: mkdir -p android/app/src/main/assets && cp web/index.html android/app/src/main/assets/index.html
+      - run:
+          name: Pasang Gradle 8.7
+          command: |
+            curl -fsSL -o /tmp/gradle.zip https://services.gradle.org/distributions/gradle-8.7-bin.zip
+            unzip -q /tmp/gradle.zip -d /tmp
+            echo 'export PATH=/tmp/gradle-8.7/bin:$PATH' >> "$BASH_ENV"
+      - run:
+          name: Build APK debug
+          command: cd android && gradle --no-daemon assembleDebug
+      - store_artifacts:
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          destination: ouwds-debug.apk
+workflows:
+  build:
+    jobs:
+      - check-web
+      - build-android
