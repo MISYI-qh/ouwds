@@ -6,3 +6,5 @@ Catur yang tenang. Produk Misyi (lahir 18-11-2026).
 - `.circleci/` cek web + build APK debug (artifact `ouwds-debug.apk`)
 
 Build lokal Android: `cp web/index.html android/app/src/main/assets/` lalu `cd android && gradle assembleDebug`.
+
+Situs: https://ouwds.my.id
