@@ -2,6 +2,8 @@ name: android
 on:
   push:
   workflow_dispatch:
+permissions:
+  contents: write
 jobs:
   apk:
     runs-on: ubuntu-latest
@@ -31,3 +33,11 @@ jobs:
         with:
           name: ouwds-debug-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
+      - name: Rilis APK
+        if: github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cp android/app/build/outputs/apk/debug/app-debug.apk ouwds.apk
+          gh release delete latest -y --cleanup-tag || true
+          gh release create latest ouwds.apk --title "ouwds (debug)" --notes "APK debug dari commit ${GITHUB_SHA::7}" --target "$GITHUB_SHA"
